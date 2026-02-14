@@ -433,6 +433,43 @@
       display:block;
       border-radius:12px;
     }
+/* ====== MODO VERTICAL (CELULAR EN PORTRAIT) ====== */
+@media (max-aspect-ratio: 1/1) {
+  body { padding: 0; }
+
+  .card{
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: auto;     /* quita el 16:9 */
+    border-radius: 0;       /* para que se vea full pantalla */
+  }
+
+  /* Pantalla 2: reacomodar texto/árbol para vertical */
+  .letter{
+    left: 6%;
+    top: 8%;
+    width: 88%;
+    font-size: 16px;
+  }
+
+  .photo{
+    right: 6%;
+    top: 42%;
+    width: 130px;           /* foto más pequeña */
+  }
+
+  .counter{
+    left: 6%;
+    bottom: 10%;
+    font-size: 16px;
+  }
+
+  .ground{
+    bottom: 8%;
+  }
+}
+
+    
   </style>
 </head>
 
