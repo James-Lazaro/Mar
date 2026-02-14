@@ -522,9 +522,8 @@
         <button class="p1-continue" id="continueBtn">Mar, continúa ❤️</button>
       </div>
 
-      <audio id="audioPlayer" loop>
-        <source src="https://www.dropbox.com/scl/fi/v8dbihkx7pj30lmjt2kxk/SHE-LOOKS-LIKE-A-DREAM.mp3?rlkey=q951cxdk40i49tsr95d7l5s3e&dl=1" type="audio/mpeg">
-      </audio>
+<audio id="audioPlayer" preload="auto" playsinline loop></audio>
+
     </div>
 
     <!-- Botón volver (pantalla 2) -->
@@ -610,13 +609,33 @@
   function showPlayIcon(){ playIcon.style.display="block"; pauseIcon.style.display="none"; }
   function showPauseIcon(){ playIcon.style.display="none"; pauseIcon.style.display="block"; }
 
-  function activateMusic(){
-    musicPlayer.classList.add('active');
-    audioPlayer.play().then(() => {
-      isPlaying = true;
-      showPauseIcon();
-    }).catch(()=>{});
+function activateMusic(){
+  musicPlayer.classList.add('active');
+
+  // Cargar el mp3 desde TU GitHub Pages (ruta local)
+  if (!audioPlayer.src) {
+    audioPlayer.src = "SHE LOOKS LIKE A DREAM.mp3"; // 
+    audioPlayer.load();
   }
+
+  audioPlayer.muted = false;
+  audioPlayer.volume = 1;
+
+  audioPlayer.play().then(() => {
+    isPlaying = true;
+    showPauseIcon();
+    updateProgress();
+  }).catch(() => {
+    // Si el navegador bloquea, pide 2do toque
+    hintText.style.display = "block";
+    hintText.style.opacity = "1";
+    hintText.textContent = "Toca otra vez ❤️ para activar la música 🎵";
+    showPlayIcon();
+    isPlaying = false;
+  });
+}
+
+
 
   function togglePlayPause(){
     if (isPlaying){
